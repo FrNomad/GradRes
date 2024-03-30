@@ -1,0 +1,9 @@
+.venv/
+.vscode/
+
+**/__pycache__
+
+CNNPractice/MNIST_data
+NLPbyCNN/data
+PreProject1/dataset
+PreProject1/splitted
