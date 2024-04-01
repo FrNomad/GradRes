@@ -59,6 +59,9 @@ def train(model, train_loader, optimizer) :
         loss.backward()
         optimizer.step()
 
+import time
+import copy
+
 def evaluate(model, test_loader) :
     model.eval()
     test_loss = 0
@@ -78,9 +81,6 @@ def evaluate(model, test_loader) :
     test_loss /= len(test_loader.dataset)
     test_accuracy = 100. * correct / len(test_loader.dataset)
     return test_loss, test_accuracy
-
-import time
-import copy
 
 def train_baseline(model, train_loader, val_loader, optimizer, num_epochs = 30) :
     best_acc = 0.0
@@ -106,4 +106,9 @@ def train_baseline(model, train_loader, val_loader, optimizer, num_epochs = 30) 
 base = train_baseline(model_base, train_loader,
                       val_loader, optimizer, EPOCH)
 
-torch.save(base, MODEL_DIR)
+if OS_TYPE == 'Linux' :
+    torch.save(base, MODEL_DIR)
+elif OS_TYPE == 'Windows' :
+    torch.save(base.state_dict(), MODEL_DIR)
+
+print("model saved!")
